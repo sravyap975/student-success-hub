@@ -1,27 +1,634 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>StudyHub - Student Life Manager & Task Tracker</title>
-    <meta name="description" content="Manage your student life with StudyHub. Track tasks, announcements, hackathons, workshops, exams, and daily notes. Never miss important deadlines." />
-    <meta name="author" content="StudyHub" />
-    <meta name="keywords" content="student task tracker, study planner, hackathon tracker, exam reminder, student life manager" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyHub - Student Life Manager & Task Tracker</title>
+  <meta name="description" content="Manage your student life with StudyHub. Track tasks, announcements, hackathons, workshops, exams, and daily notes. Never miss important deadlines.">
+  <meta name="keywords" content="student task tracker, study planner, hackathon tracker, exam reminder, student life manager">
+  <meta property="og:title" content="StudyHub - Student Life Manager & Task Tracker">
+  <meta property="og:description" content="Manage your student life with StudyHub. Track tasks, announcements, hackathons, workshops, exams, and daily notes.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="/">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Sidebar (Desktop) -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <h1>StudyHub</h1>
+          <span>Life Manager</span>
+        </div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="nav-btn active" data-view="dashboard">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+        Dashboard
+      </button>
+      <button class="nav-btn" data-view="tasks">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 11l3 3L22 4"></path>
+          <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+        </svg>
+        Tasks
+      </button>
+      <button class="nav-btn" data-view="events">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2z"></path>
+          <path d="M16 2v4M8 2v4M3 10h18"></path>
+        </svg>
+        Events
+      </button>
+      <button class="nav-btn" data-view="notes">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z"></path>
+          <polyline points="14,2 14,8 20,8"></polyline>
+        </svg>
+        Notes
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="nav-btn" id="themeToggle">
+        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"></circle>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+        </svg>
+        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+        </svg>
+        <span class="theme-text">Dark Mode</span>
+      </button>
+    </div>
+  </aside>
 
-    <meta property="og:title" content="StudyHub - Student Life Manager & Task Tracker" />
-    <meta property="og:description" content="Manage your student life with StudyHub. Track tasks, announcements, hackathons, workshops, exams, and daily notes." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+  <!-- Mobile Header -->
+  <header class="mobile-header">
+    <div class="mobile-logo">
+      <div class="logo-icon small">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+          <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+        </svg>
+      </div>
+      <span>StudyHub</span>
+    </div>
+    <button class="menu-btn" id="menuBtn">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </header>
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@StudyHub" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-    
-    <link rel="canonical" href="/" />
-  </head>
+  <!-- Mobile Bottom Nav -->
+  <nav class="mobile-nav">
+    <button class="mobile-nav-btn active" data-view="dashboard">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="7" height="7"></rect>
+        <rect x="14" y="3" width="7" height="7"></rect>
+        <rect x="14" y="14" width="7" height="7"></rect>
+        <rect x="3" y="14" width="7" height="7"></rect>
+      </svg>
+      <span>Dashboard</span>
+    </button>
+    <button class="mobile-nav-btn" data-view="tasks">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 11l3 3L22 4"></path>
+        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+      </svg>
+      <span>Tasks</span>
+    </button>
+    <button class="mobile-nav-btn" data-view="events">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2z"></path>
+        <path d="M16 2v4M8 2v4M3 10h18"></path>
+      </svg>
+      <span>Events</span>
+    </button>
+    <button class="mobile-nav-btn" data-view="notes">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z"></path>
+        <polyline points="14,2 14,8 20,8"></polyline>
+      </svg>
+      <span>Notes</span>
+    </button>
+  </nav>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Notification Banner -->
+    <div class="notification-banner" id="notificationBanner">
+      <div class="notification-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 01-3.46 0"></path>
+          <line x1="1" y1="1" x2="23" y2="23"></line>
+        </svg>
+      </div>
+      <div class="notification-text">
+        <strong>Enable Notifications</strong>
+        <span>Get reminders for upcoming deadlines and events</span>
+      </div>
+      <button class="btn btn-primary btn-sm" id="enableNotifications">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 01-3.46 0"></path>
+        </svg>
+        Enable
+      </button>
+    </div>
+
+    <!-- Dashboard View -->
+    <section class="view active" id="dashboardView">
+      <div class="welcome-card">
+        <div class="welcome-header">
+          <div class="welcome-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 3l1.912 5.813a2 2 0 001.272 1.272L21 12l-5.813 1.912a2 2 0 00-1.272 1.272L12 21l-1.912-5.813a2 2 0 00-1.272-1.272L3 12l5.813-1.912a2 2 0 001.272-1.272L12 3z"></path>
+            </svg>
+          </div>
+          <div class="welcome-text">
+            <h2 id="greeting">Good morning, Student!</h2>
+            <p id="currentDate"></p>
+          </div>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon stat-pending">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </div>
+            <span class="stat-label">Pending</span>
+            <strong class="stat-value" id="pendingCount">0</strong>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-completed">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 11l3 3L22 4"></path>
+                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+              </svg>
+            </div>
+            <span class="stat-label">Completed</span>
+            <strong class="stat-value" id="completedCount">0</strong>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-overdue">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"></path>
+                <line x1="12" y1="9" x2="12" y2="13"></line>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+            </div>
+            <span class="stat-label">Overdue</span>
+            <strong class="stat-value" id="overdueCount">0</strong>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-events">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2z"></path>
+                <path d="M16 2v4M8 2v4M3 10h18"></path>
+              </svg>
+            </div>
+            <span class="stat-label">Events</span>
+            <strong class="stat-value" id="eventsCount">0</strong>
+          </div>
+        </div>
+        <div class="progress-section">
+          <div class="progress-header">
+            <span>Task Completion</span>
+            <span id="progressPercent">0%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-actions">
+        <button class="btn btn-primary" onclick="openTaskModal()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Add Task
+        </button>
+        <button class="btn btn-outline" onclick="openEventModal()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2z"></path>
+            <path d="M16 2v4M8 2v4M3 10h18"></path>
+          </svg>
+          Add Event
+        </button>
+        <button class="btn btn-outline" onclick="openNoteModal()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z"></path>
+            <polyline points="14,2 14,8 20,8"></polyline>
+          </svg>
+          Add Note
+        </button>
+      </div>
+
+      <!-- Overdue Alert -->
+      <div class="overdue-alert hidden" id="overdueAlert">
+        <div class="alert-header">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+          <h3>Overdue Tasks</h3>
+          <span class="badge badge-destructive" id="overdueAlertCount">0</span>
+        </div>
+        <div class="task-list" id="overdueTasksList"></div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="dashboard-section">
+          <div class="section-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12,6 12,12 16,14"></polyline>
+            </svg>
+            <h3>Today's Tasks</h3>
+            <span class="badge" id="todayTasksCount">0</span>
+          </div>
+          <div class="task-list" id="todayTasksList">
+            <div class="empty-state">
+              <div class="empty-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M9 11l3 3L22 4"></path>
+                  <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+                </svg>
+              </div>
+              <h4>No tasks for today</h4>
+              <p>You're all caught up! Add a new task to stay organized.</p>
+              <button class="btn btn-outline btn-sm" onclick="openTaskModal()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Add Task
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="dashboard-section">
+          <div class="section-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2z"></path>
+              <path d="M16 2v4M8 2v4M3 10h18"></path>
+            </svg>
+            <h3>Upcoming Events</h3>
+            <span class="badge badge-event" id="upcomingEventsCount">0</span>
+          </div>
+          <div class="event-list" id="upcomingEventsList">
+            <div class="empty-state">
+              <div class="empty-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M19 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2z"></path>
+                  <path d="M16 2v4M8 2v4M3 10h18"></path>
+                </svg>
+              </div>
+              <h4>No upcoming events</h4>
+              <p>Add hackathons, workshops, or exams to never miss an opportunity.</p>
+              <button class="btn btn-outline btn-sm" onclick="openEventModal()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Add Event
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tasks View -->
+    <section class="view" id="tasksView">
+      <div class="view-header">
+        <div>
+          <h2>Tasks</h2>
+          <p id="pendingTasksText">0 pending tasks</p>
+        </div>
+        <button class="btn btn-primary" onclick="openTaskModal()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Add Task
+        </button>
+      </div>
+      
+      <div class="card progress-card">
+        <div class="progress-header">
+          <span>Overall Progress</span>
+          <span id="tasksProgressPercent">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="tasksProgressFill"></div>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 11l3 3L22 4"></path>
+            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+          </svg>
+          All <span class="filter-count" id="filterAllCount">0</span>
+        </button>
+        <button class="filter-btn" data-filter="today">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12,6 12,12 16,14"></polyline>
+          </svg>
+          Today <span class="filter-count" id="filterTodayCount">0</span>
+        </button>
+        <button class="filter-btn" data-filter="upcoming">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2z"></path>
+            <path d="M16 2v4M8 2v4M3 10h18"></path>
+          </svg>
+          Upcoming <span class="filter-count" id="filterUpcomingCount">0</span>
+        </button>
+        <button class="filter-btn" data-filter="overdue">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+          Overdue <span class="filter-count" id="filterOverdueCount">0</span>
+        </button>
+        <button class="filter-btn" data-filter="completed">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+            <polyline points="22,4 12,14.01 9,11.01"></polyline>
+          </svg>
+          Completed <span class="filter-count" id="filterCompletedCount">0</span>
+        </button>
+      </div>
+
+      <div class="task-list" id="allTasksList">
+        <div class="empty-state">
+          <div class="empty-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M9 11l3 3L22 4"></path>
+              <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+            </svg>
+          </div>
+          <h4>No tasks</h4>
+          <p>Add a new task to get started.</p>
+          <button class="btn btn-outline btn-sm" onclick="openTaskModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Add Task
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Events View -->
+    <section class="view" id="eventsView">
+      <div class="view-header">
+        <div>
+          <h2>Events & Announcements</h2>
+          <p>Track hackathons, workshops, exams, and competitions</p>
+        </div>
+        <button class="btn btn-primary" onclick="openEventModal()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Add Event
+        </button>
+      </div>
+
+      <div class="filter-bar">
+        <button class="filter-btn active" data-event-filter="all">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11,5 6,9 2,9 2,15 6,15 11,19 11,5"></polygon>
+            <path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"></path>
+          </svg>
+          All Events <span class="filter-count" id="eventFilterAllCount">0</span>
+        </button>
+        <button class="filter-btn" data-event-filter="upcoming">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2z"></path>
+            <path d="M16 2v4M8 2v4M3 10h18"></path>
+          </svg>
+          Upcoming <span class="filter-count" id="eventFilterUpcomingCount">0</span>
+        </button>
+        <button class="filter-btn" data-event-filter="missed">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+          Missed <span class="filter-count" id="eventFilterMissedCount">0</span>
+        </button>
+      </div>
+
+      <div class="event-grid" id="allEventsList">
+        <div class="empty-state full-width">
+          <div class="empty-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <polygon points="11,5 6,9 2,9 2,15 6,15 11,19 11,5"></polygon>
+              <path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"></path>
+            </svg>
+          </div>
+          <h4>No events</h4>
+          <p>Add upcoming hackathons, workshops, or exams to stay on track.</p>
+          <button class="btn btn-outline btn-sm" onclick="openEventModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Add Event
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Notes View -->
+    <section class="view" id="notesView">
+      <div class="view-header">
+        <div>
+          <h2>Daily Notes</h2>
+          <p>Capture thoughts, reminders, and ideas</p>
+        </div>
+        <button class="btn btn-primary" onclick="openNoteModal()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Add Note
+        </button>
+      </div>
+
+      <div class="notes-container" id="allNotesList">
+        <div class="empty-state full-width">
+          <div class="empty-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z"></path>
+              <polyline points="14,2 14,8 20,8"></polyline>
+            </svg>
+          </div>
+          <h4>No notes yet</h4>
+          <p>Start capturing your thoughts, reminders, and daily observations.</p>
+          <button class="btn btn-outline btn-sm" onclick="openNoteModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Add Note
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Task Modal -->
+  <div class="modal-overlay" id="taskModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="taskModalTitle">Add New Task</h3>
+        <button class="modal-close" onclick="closeTaskModal()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <form id="taskForm" onsubmit="handleTaskSubmit(event)">
+        <input type="hidden" id="taskId">
+        <div class="form-group">
+          <label for="taskTitle">Task Title</label>
+          <input type="text" id="taskTitle" placeholder="Enter task title..." required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="taskCategory">Category</label>
+            <select id="taskCategory">
+              <option value="study">📚 Study</option>
+              <option value="event">🎉 Event</option>
+              <option value="personal">👤 Personal</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="taskPriority">Priority</label>
+            <select id="taskPriority">
+              <option value="high">🔴 High</option>
+              <option value="medium" selected>🟡 Medium</option>
+              <option value="low">🟢 Low</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="taskDueDate">Due Date</label>
+          <input type="date" id="taskDueDate" required>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeTaskModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="taskSubmitBtn">Add Task</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Event Modal -->
+  <div class="modal-overlay" id="eventModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="eventModalTitle">Add New Event</h3>
+        <button class="modal-close" onclick="closeEventModal()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <form id="eventForm" onsubmit="handleEventSubmit(event)">
+        <input type="hidden" id="eventId">
+        <div class="form-group">
+          <label for="eventName">Event Name</label>
+          <input type="text" id="eventName" placeholder="e.g., Hackathon 2024, Workshop on AI..." required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="registrationDeadline">Registration Deadline</label>
+            <input type="date" id="registrationDeadline" required>
+          </div>
+          <div class="form-group">
+            <label for="participationDate">Event Date</label>
+            <input type="date" id="participationDate" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="eventNotes">Additional Notes (optional)</label>
+          <textarea id="eventNotes" rows="3" placeholder="Any additional information about the event..."></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeEventModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="eventSubmitBtn">Add Event</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Note Modal -->
+  <div class="modal-overlay" id="noteModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="noteModalTitle">Add New Note</h3>
+        <button class="modal-close" onclick="closeNoteModal()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <form id="noteForm" onsubmit="handleNoteSubmit(event)">
+        <input type="hidden" id="noteId">
+        <div class="form-group">
+          <label for="noteDate">Date</label>
+          <input type="date" id="noteDate" required>
+        </div>
+        <div class="form-group">
+          <label for="noteContent">Note</label>
+          <textarea id="noteContent" rows="5" placeholder="Write your thoughts, reminders, or anything you want to remember..." required></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeNoteModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="noteSubmitBtn">Add Note</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
 </html>
