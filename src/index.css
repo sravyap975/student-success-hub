@@ -1,96 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@300..700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 180 20% 99%;
+    --foreground: 200 25% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 200 25% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 200 25% 10%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 175 84% 32%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 180 20% 95%;
+    --secondary-foreground: 200 25% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 180 15% 94%;
+    --muted-foreground: 200 15% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 175 70% 92%;
+    --accent-foreground: 175 84% 25%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 180 20% 90%;
+    --input: 180 20% 90%;
+    --ring: 175 84% 32%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Priority colors */
+    --priority-high: 4 90% 58%;
+    --priority-high-bg: 4 90% 95%;
+    --priority-medium: 38 92% 50%;
+    --priority-medium-bg: 38 92% 95%;
+    --priority-low: 142 71% 45%;
+    --priority-low-bg: 142 71% 95%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Category colors */
+    --category-study: 217 91% 60%;
+    --category-study-bg: 217 91% 95%;
+    --category-event: 270 70% 60%;
+    --category-event-bg: 270 70% 95%;
+    --category-personal: 175 84% 40%;
+    --category-personal-bg: 175 84% 95%;
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* Status colors */
+    --success: 142 71% 45%;
+    --success-bg: 142 71% 95%;
+    --warning: 38 92% 50%;
+    --warning-bg: 38 92% 95%;
+    --info: 217 91% 60%;
+    --info-bg: 217 91% 95%;
 
-    --sidebar-primary-foreground: 0 0% 98%;
+    /* Sidebar */
+    --sidebar-background: 180 20% 97%;
+    --sidebar-foreground: 200 25% 15%;
+    --sidebar-primary: 175 84% 32%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 175 70% 92%;
+    --sidebar-accent-foreground: 175 84% 25%;
+    --sidebar-border: 180 20% 90%;
+    --sidebar-ring: 175 84% 32%;
 
-    --sidebar-accent: 240 4.8% 95.9%;
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(175 84% 32%) 0%, hsl(185 70% 40%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(180 20% 98%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(175 84% 95%) 0%, hsl(185 70% 98%) 50%, hsl(270 70% 98%) 100%);
 
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(200 25% 10% / 0.03);
+    --shadow-md: 0 4px 6px -1px hsl(200 25% 10% / 0.05), 0 2px 4px -2px hsl(200 25% 10% / 0.05);
+    --shadow-lg: 0 10px 15px -3px hsl(200 25% 10% / 0.08), 0 4px 6px -4px hsl(200 25% 10% / 0.05);
+    --shadow-glow: 0 0 20px hsl(175 84% 32% / 0.15);
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 200 25% 8%;
+    --foreground: 180 20% 98%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 200 25% 10%;
+    --card-foreground: 180 20% 98%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 200 25% 10%;
+    --popover-foreground: 180 20% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 175 70% 50%;
+    --primary-foreground: 200 25% 5%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 200 20% 15%;
+    --secondary-foreground: 180 20% 95%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 200 20% 15%;
+    --muted-foreground: 200 15% 60%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 175 50% 15%;
+    --accent-foreground: 175 70% 70%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 200 20% 18%;
+    --input: 200 20% 18%;
+    --ring: 175 70% 50%;
+
+    /* Priority colors - dark mode */
+    --priority-high: 4 80% 55%;
+    --priority-high-bg: 4 80% 15%;
+    --priority-medium: 38 82% 50%;
+    --priority-medium-bg: 38 82% 15%;
+    --priority-low: 142 61% 45%;
+    --priority-low-bg: 142 61% 12%;
+
+    /* Category colors - dark mode */
+    --category-study: 217 81% 60%;
+    --category-study-bg: 217 81% 15%;
+    --category-event: 270 60% 60%;
+    --category-event-bg: 270 60% 15%;
+    --category-personal: 175 70% 50%;
+    --category-personal-bg: 175 70% 12%;
+
+    /* Status colors - dark mode */
+    --success: 142 61% 45%;
+    --success-bg: 142 61% 12%;
+    --warning: 38 82% 50%;
+    --warning-bg: 38 82% 15%;
+    --info: 217 81% 60%;
+    --info-bg: 217 81% 15%;
+
+    /* Sidebar - dark mode */
+    --sidebar-background: 200 25% 7%;
+    --sidebar-foreground: 180 20% 95%;
+    --sidebar-primary: 175 70% 50%;
+    --sidebar-primary-foreground: 200 25% 5%;
+    --sidebar-accent: 175 50% 15%;
+    --sidebar-accent-foreground: 175 70% 70%;
+    --sidebar-border: 200 20% 18%;
+    --sidebar-ring: 175 70% 50%;
+
+    /* Gradients - dark mode */
+    --gradient-primary: linear-gradient(135deg, hsl(175 70% 40%) 0%, hsl(185 60% 35%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(200 25% 10%) 0%, hsl(200 25% 8%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(200 25% 10%) 0%, hsl(200 25% 8%) 50%, hsl(270 30% 10%) 100%);
+
+    /* Shadows - dark mode */
+    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.2);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.3), 0 2px 4px -2px hsl(0 0% 0% / 0.2);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.4), 0 4px 6px -4px hsl(0 0% 0% / 0.3);
+    --shadow-glow: 0 0 20px hsl(175 70% 50% / 0.2);
   }
 }
 
@@ -100,6 +164,85 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-sm border border-border/50;
+    box-shadow: var(--shadow-md);
+  }
+
+  .glow-effect {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+
+  .animate-bounce-subtle {
+    animation: bounceSubtle 0.5s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes bounceSubtle {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-3px);
+    }
   }
 }
